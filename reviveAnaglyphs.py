@@ -3,7 +3,9 @@ import numpy as np
 from wand.image import Image
 
 if len(sys.argv) != 2:
-    print("Anaglyph3D.py anaglyph.jpg")
+    print("Usage:")
+    print("python reviveAnaglyphs.py [input image]")
+    print("For example: 'python reviveAnaglyphs.py download.jpg'")
     exit(0)
 
 imgQR = cv2.imread(sys.argv[1])
@@ -14,15 +16,20 @@ g = cv2.GaussianBlur(g,(3,3),0)
 b = cv2.GaussianBlur(b,(3,3),0)
 gb = cv2.addWeighted(g,0.5,b,0.5,0)
 
+cv2.imwrite("r.png", r)
+cv2.imwrite("gb.png", gb)
+
 mean_r = (np.mean(r))
 mean_gb = (np.mean(gb))
 
-r = cv2.equalizeHist(r)
-gb = cv2.equalizeHist(gb)
+
 
 #to raise some brightness
-#r = cv2.add(r, (mean_gb-mean_r) + 15)
-#gb = cv2.add(gb, 15)
+r = cv2.add(r, (mean_gb-mean_r) )
+#gb = cv2.add(gb)
+
+#r = cv2.equalizeHist(r)
+#gb = cv2.equalizeHist(gb)
 
     
 cv2.imwrite("left.png", r)

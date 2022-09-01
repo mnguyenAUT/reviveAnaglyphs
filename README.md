@@ -5,4 +5,5 @@ Users can pass in an low-resolution antique anaglyph 3D image and the system wil
 Usage:
 
 python reviveAnaglyphs.py [input image]
+
 For example: 'python reviveAnaglyphs.py download.jpg'
